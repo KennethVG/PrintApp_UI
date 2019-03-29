@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Patient details</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/script.js" defer></script>
+    <script src="js/patient.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <br>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="index.html"><i class="fas fa-home"> Home</i></a>
+                <a class="nav-item nav-link" href="print.html"><i class="fas fa-print"> Print Job</i></a>
+                <a class="nav-item nav-link active" href="patient.html"><i class="fas fa-user-injured"> Gegevens
+                        Patiënt</i></a>
+            </div>
+        </nav>
+        <br>
+
+        <form id="externalIdForm">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" id="inputExternalId" placeholder="externalId patient"
+                        minlength="5">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-dark" id="zoekPatient">Zoek patiënt</button>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <span id="foutExternalId" class="fout"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" id="inputNaam" placeholder="naam of voornaam patient">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-dark" id="zoekPatientOpNaam">Zoek patiënt op naam</button>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <select id="selectPatient" class="form-control">
+                        <option value="">Selecteer patiënt ...</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <form id="patientForm">
+            <fieldset>
+                <legend><img src="img/patient.png" alt="patient logo" /> Gegevens patiënt:</legend>
+                <br>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="inputAchternaam">Achternaam</label>
+                        <input type="text" class="form-control" id="inputAchternaam" placeholder="achternaam" readonly>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputVoornaam">Voornaam</label>
+                        <input type="text" class="form-control" id="inputVoornaam" placeholder="voornaam" readonly>
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend><img src="img/doctor_3.png" alt="doctor logo" /> Gegevens huisarts patiënt:</legend>
+                <br>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="inputHuisartsMnemonic">Mnemonic</label>
+                        <input type="text" class="form-control" id="inputHuisartsMnemonic"
+                            placeholder="mnemonic huisarts" readonly>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputHuisartsAchternaam">Achternaam</label>
+                        <input type="text" class="form-control" id="inputHuisartsAchternaam"
+                            placeholder="achternaam huisarts" readonly>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputHuisartsVoornaam">Voornaam</label>
+                        <input type="text" class="form-control" id="inputHuisartsVoornaam"
+                            placeholder="voornaam huisarts" readonly>
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend><img src="img/doctor_2.png" alt="doctor logo" /> Wijzig huisarts patiënt:</legend>
+                <br>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" id="inputMnemonicNieuweHuisarts"
+                            placeholder="mnemonic nieuwe huisarts" minlength="5" maxlength="5" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="inputNaamNieuweHuisarts"
+                            placeholder="naam nieuwe huisarts" readonly>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button type="submit" class="btn btn-dark" id="updatePatient" disabled>Update patiënt</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

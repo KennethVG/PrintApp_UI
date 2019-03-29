@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Dokter details</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/script.js" defer></script>
+  <script src="js/dokter.js" defer></script>
+  
+
+</head>
+
+<body>
+  <div class="container">
+    <br>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="index.html"><i class="fas fa-home"> Home</i></a>
+        <a class="nav-item nav-link" href="print.html"><i class="fas fa-print"> Print Job</i></a>
+        <a class="nav-item nav-link" href="patient.html"><i class="fas fa-user-injured"> Gegevens Patiënt</i></a>
+      </div>
+    </nav>
+    <br>
+
+    <form id="mnemonicForm">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <input type="text" class="form-control" id="inputExternalId" placeholder="mnemonic dokter" minlength="5"
+            maxlength="5">
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark" id="zoekDokter">Zoek dokter</button>
+        </div>
+
+        <div class="form-group col-md-4">
+          <span id="foutExternalId" class="fout"></span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <input type="text" class="form-control" id="inputNaam" placeholder="naam of voornaam dokter">
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark" id="zoekDokterOpNaam">Zoek dokter op naam</button>
+        </div>
+
+        <div class="form-group col-md-4">
+          <select id="selectdokters" class="form-control">
+            <option value="">Selecteer dokter ...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  
+
+    <form id="dokterForm">
+      <fieldset>
+        <legend><img src="img/doctor.png" alt="doctor logo" /> Standaard gegevens dokter:</legend>
+        <br>
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="inputTitel">Titel</label>
+            <input type="text" class="form-control" id="inputTitel" placeholder="titel" value="Dr." readonly>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="inputAchternaam">Achternaam</label>
+            <input type="text" class="form-control" id="inputAchternaam" placeholder="achternaam" readonly>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="inputVoornaam">Voornaam</label>
+            <input type="text" class="form-control" id="inputVoornaam" placeholder="voornaam" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputNihii">Riziv nummer</label>
+          <input type="text" class="form-control" id="inputNihii" placeholder="riziv nummer" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="inputStraat">Straat en nummer</label>
+          <input type="text" class="form-control" id="inputStraat" placeholder="straat en nummer">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputGemeente">Gemeente</label>
+            <input type="text" class="form-control" id="inputGemeente" placeholder="gemeente">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Postcode</label>
+            <input type="text" class="form-control" id="inputZip" placeholder="postcode">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputTelefoon">Telefoon</label>
+            <input type="text" class="form-control" id="inputTelefoon" placeholder="telefoon">
+          </div>
+        </div>
+        <br>
+      </fieldset>
+
+      <fieldset>
+        <legend><img src="img/print.png" alt="print logo" /> Print en verzend opties:</legend>
+        <br>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="selectFormaat">E-health formaat</label>
+            <select id="selectFormaat" class="form-control">
+              <option value="MEDIDOC">Medidoc</option>
+              <option value="MEDAR">Medar</option>
+              <option value="MEDICARD">Medicard</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputNihiiAdres">Riziv adres</label>
+            <input type="text" class="form-control" id="inputNihiiAdres" placeholder="riziv adres" maxlength="11">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkEprotocols">
+              <label class="custom-control-label" for="checkEprotocols">E-protocols</label>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkPrintprotocols">
+              <label class="custom-control-label" for="checkPrintprotocols">Printprotocols</label>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkTweeKopijs">
+              <label class="custom-control-label" for="checkTweeKopijs">Twee kopijs</label>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkActief">
+              <label class="custom-control-label" for="checkActief">Actief</label>
+            </div>
+          </div>
+        </div>
+
+      </fieldset>
+      <button type="submit" class="btn btn-dark" id="updateDokter" disabled>Update dokter</button>
+    </form>
+
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+</body>
+
+</html>
