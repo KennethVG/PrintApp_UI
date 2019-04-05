@@ -101,7 +101,8 @@ $(btnZoekPatientOpNaam).click(() => {
         $.getJSON(PATIENT_URL_SEARCH + inputNaam.val(), ((data) => {
             for (let c of data.patients) {
                 console.log(c);
-                // selectPatient.append(new Option(c.firstName + ' ' + c.lastName + '(' + c.externalID + ')', c.externalID));
+                let opt = new Option(c.person.firstName + ' ' + c.person.lastName + '(' + c.externalId + ')', c.externalId);
+                selectPatient.append(opt);
             }
         })).done(() => {
             hidePleaseWait();
@@ -110,6 +111,12 @@ $(btnZoekPatientOpNaam).click(() => {
             toonFoutmelding(jqXHR);
         });
     }
+});
+
+$(selectPatient).change(() => {
+        const getPatient = PATIENT_URL +  selectPatient.val();
+        inputExternalId.val(selectPatient.val());
+        zoekPatientOpExternalId(getPatient);
 });
 
 function zoekPatientOpExternalId(url) {

@@ -22,3 +22,7 @@ body {
     width: 500px;
     height: 300px;
 }
+
+#printstatus{
+    font-weight: bold;
+}
