@@ -1,3 +1,6 @@
+// const PATIENT_URL = "http://localhost:8080/patient/";
+// const PATIENT_URL_SEARCH = "http://localhost:8080/patient/search/";
+// const CAREGIVER_URL = "http://localhost:8080/caregiver/";
 const PATIENT_URL = "http://cctest:8080/patient/";
 const PATIENT_URL_SEARCH = "http://cctest:8080/patient/search/";
 const CAREGIVER_URL = "http://cctest:8080/caregiver/";
@@ -100,7 +103,6 @@ $(btnZoekPatientOpNaam).click(() => {
         selectPatient.empty().append(new Option("Selecteer patiënt ...", ""));
         $.getJSON(PATIENT_URL_SEARCH + inputNaam.val(), ((data) => {
             for (let c of data.patients) {
-                console.log(c);
                 let opt = new Option(c.person.firstName + ' ' + c.person.lastName + '(' + c.externalId + ')', c.externalId);
                 selectPatient.append(opt);
             }
@@ -108,6 +110,7 @@ $(btnZoekPatientOpNaam).click(() => {
             hidePleaseWait();
             selectPatient.show();
         }).fail((jqXHR) => {
+            hidePleaseWait();
             toonFoutmelding(jqXHR);
         });
     }
