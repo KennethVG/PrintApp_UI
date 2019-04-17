@@ -1,6 +1,6 @@
-const PATIENT_URL = "http://localhost:8080/patient/";
-const PATIENT_URL_SEARCH = "http://localhost:8080/patient/search/";
-const CAREGIVER_URL = "http://localhost:8080/caregiver/";
+const PATIENT_URL = "http://cctest:8080/patient/";
+const PATIENT_URL_SEARCH = "http://cctest:8080/patient/search/";
+const CAREGIVER_URL = "http://cctest:8080/caregiver/";
 
 // Formulieren:
 const patientForm = $('#patientForm');
