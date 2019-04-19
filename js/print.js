@@ -1,9 +1,9 @@
 'use strict';
 
-// const PRINTJOB_URL_START = "http://localhost:8080/printjob/start";
-// const PRINTJOB_URL_STOP = "http://localhost:8080/printjob/stop";
-const PRINTJOB_URL_START = "http://cctest:8080/printjob/start";
-const PRINTJOB_URL_STOP = "http://cctest:8080/printjob/stop";
+// const PRINTJOB_URL_START = "http://localhost:8090/printjob/start";
+// const PRINTJOB_URL_STOP = "http://localhost:8090/printjob/stop";
+const PRINTJOB_URL_START = "http://cctest:8090/printjob/start";
+const PRINTJOB_URL_STOP = "http://cctest:8090/printjob/stop";
 
 const btnStart = $("#start");
 const btnStop = $("#stop");
