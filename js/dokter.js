@@ -18,10 +18,10 @@ class Dokter {
     }
 }
 
-// const CAREGIVER_URL = "http://localhost:8090/caregiver/";
-// const CAREGIVER_URL_SEARCH = "http://localhost:8090/caregiver/search/";
-const CAREGIVER_URL = "http://cctest:8090/caregiver/";
-const CAREGIVER_URL_SEARCH = "http://cctest:8090/caregiver/search/";
+// const CAREGIVER_URL = "https://localhost:8090/caregiver/";
+// const CAREGIVER_URL_SEARCH = "https://localhost:8090/caregiver/search/";
+const CAREGIVER_URL = "https://cctest:8090/caregiver/";
+const CAREGIVER_URL_SEARCH = "https://cctest:8090/caregiver/search/";
 // Formulieren:
 const formulier = $('#dokterForm');
 const mnemonicFormulier = $('#mnemonicForm');

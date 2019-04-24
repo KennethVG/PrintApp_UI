@@ -1,9 +1,9 @@
-// const PATIENT_URL = "http://localhost:8090/patient/";
-// const PATIENT_URL_SEARCH = "http://localhost:8090/patient/search/";
-// const CAREGIVER_URL = "http://localhost:8090/caregiver/";
-const PATIENT_URL = "http://cctest:8090/patient/";
-const PATIENT_URL_SEARCH = "http://cctest:8090/patient/search/";
-const CAREGIVER_URL = "http://cctest:8090/caregiver/";
+// const PATIENT_URL = "https://localhost:8090/patient/";
+// const PATIENT_URL_SEARCH = "https://localhost:8090/patient/search/";
+// const CAREGIVER_URL = "https://localhost:8090/caregiver/";
+const PATIENT_URL = "https://cctest:8090/patient/";
+const PATIENT_URL_SEARCH = "https://cctest:8090/patient/search/";
+const CAREGIVER_URL = "https://cctest:8090/caregiver/";
 
 // Formulieren:
 const patientForm = $('#patientForm');
