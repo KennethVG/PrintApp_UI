@@ -68,17 +68,31 @@ $(btnZoekDokterOpNaam).click(() => {
     if (checkNaam("Vul de voor en/of achternaam van de dokter in")) {
         showPleaseWait();
         selectDokters.empty().append(new Option("Selecteer dokter ...", ""));
-        $.getJSON(CAREGIVER_URL_SEARCH + inputNaam.val(), ((data) => {
-            for (let c of data.caregivers) {
-                selectDokters.append(new Option(c.firstName + ' ' + c.lastName + '(' + c.externalID + ')', c.externalID));
-            }
-        })).done(() => {
-            hidePleaseWait();
-            selectDokters.show();
-        }).fail((jqXHR) => {
-            hidePleaseWait();
-            toonFoutmelding(jqXHR);
-        });
+
+        $.ajax(getRequest(CAREGIVER_URL_SEARCH + inputNaam.val()))
+            .done((data) => {
+                for (let c of data.caregivers) {
+                    selectDokters.append(new Option(c.firstName + ' ' + c.lastName + '(' + c.externalID + ')', c.externalID));
+                }
+                hidePleaseWait();
+                selectDokters.show();
+            }).fail((jqXHR) => {
+                hidePleaseWait();
+                toonFoutmelding(jqXHR);
+            });
+
+
+        // $.getJSON(CAREGIVER_URL_SEARCH + inputNaam.val(), ((data) => {
+        //     for (let c of data.caregivers) {
+        //         selectDokters.append(new Option(c.firstName + ' ' + c.lastName + '(' + c.externalID + ')', c.externalID));
+        //     }
+        // })).done(() => {
+        //     hidePleaseWait();
+        //     selectDokters.show();
+        // }).fail((jqXHR) => {
+        //     hidePleaseWait();
+        //     toonFoutmelding(jqXHR);
+        // });
     }
 });
 
@@ -115,6 +129,9 @@ $(btnUpdateDokter).click(() => {
             type: "POST",
             data: JSON.stringify(dokter),
             contentType: "application/json; charset=utf-8",
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            },
             success: function (response) {
                 window.alert(response);
                 mnemonicFormulier.trigger("reset");
@@ -128,7 +145,7 @@ $(btnUpdateDokter).click(() => {
     }
 });
 
-function zoekDokterOpExternalId(url) {
+function getRequest(url) {
     const settings = {
         'cache': false,
         "async": true,
@@ -140,8 +157,11 @@ function zoekDokterOpExternalId(url) {
             "Access-Control-Allow-Origin": "*"
         }
     };
+    return settings;
+}
 
-    $.ajax(settings)
+function zoekDokterOpExternalId(url) {
+    $.ajax(getRequest(url))
         .done((data) => {
             inputTitel.val(data.title == '' ? 'Dr.' : data.title);
             inputAchternaam.val(data.lastName);
@@ -157,6 +177,7 @@ function zoekDokterOpExternalId(url) {
             checkEprotocols.prop('checked', data.eProtocols);
             checkPrintprotocols.prop('checked', data.printProtocols);
             checkTweeKopijs.prop('checked', data.secondCopy);
+            btnUpdateDokter.prop('disabled', false);
         }).fail((jqXHR) => {
             toonFoutmelding(jqXHR);
         });
