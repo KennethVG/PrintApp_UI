@@ -129,8 +129,20 @@ $(btnUpdateDokter).click(() => {
 });
 
 function zoekDokterOpExternalId(url) {
-    $.getJSON(url,
-        ((data) => {
+    const settings = {
+        'cache': false,
+        "async": true,
+        "crossDomain": true,
+        "url": url,
+        "method": "GET",
+        "headers": {
+            "accept": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        }
+    };
+
+    $.ajax(settings)
+        .done((data) => {
             inputTitel.val(data.title == '' ? 'Dr.' : data.title);
             inputAchternaam.val(data.lastName);
             inputVoornaam.val(data.firstName);
@@ -145,10 +157,32 @@ function zoekDokterOpExternalId(url) {
             checkEprotocols.prop('checked', data.eProtocols);
             checkPrintprotocols.prop('checked', data.printProtocols);
             checkTweeKopijs.prop('checked', data.secondCopy);
-        })
-    ).done(() => {
-        btnUpdateDokter.prop('disabled', false);
-    }).fail((jqXHR) => {
-        toonFoutmelding(jqXHR);
-    });
+        }).fail((jqXHR) => {
+            toonFoutmelding(jqXHR);
+        });
+
+
+
+    // $.getJSON(url,
+    //     ((data) => {
+    //         inputTitel.val(data.title == '' ? 'Dr.' : data.title);
+    //         inputAchternaam.val(data.lastName);
+    //         inputVoornaam.val(data.firstName);
+    //         inputNihii.val(data.nihii);
+    //         inputStraatEnNummer.val(data.streetWithNumber);
+    //         inputGemeente.val(data.city);
+    //         inputPostcode.val(data.zip);
+    //         inputTelefoon.val(data.phone);
+    //         inputNihiiAdres.val(data.nihiiAddress);
+    //         selectFormaat.val(data.format).prop('selected', true);
+    //         checkActief.prop('checked', data.active);
+    //         checkEprotocols.prop('checked', data.eProtocols);
+    //         checkPrintprotocols.prop('checked', data.printProtocols);
+    //         checkTweeKopijs.prop('checked', data.secondCopy);
+    //     })
+    // ).done(() => {
+    //     btnUpdateDokter.prop('disabled', false);
+    // }).fail((jqXHR) => {
+    //     toonFoutmelding(jqXHR);
+    // });
 }
