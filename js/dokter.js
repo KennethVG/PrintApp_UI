@@ -93,6 +93,8 @@ $(selectDokters).change(() => {
 $(btnZoekDokter).click(() => {
     if (checkExternalId("Vul de mnemonic in van de dokter")) {
         foutExternalId.hide();
+        selectDokters.hide();
+        inputNaam.val('');
         const getDokter = CAREGIVER_URL + inputExternalId.val();
         zoekDokterOpExternalId(getDokter);
     }
@@ -149,9 +151,6 @@ function getRequest(url) {
 }
 
 function zoekDokterOpExternalId(url) {
-    selectDokters.hide();
-    inputNaam.val('');
-
     $.ajax(getRequest(url))
         .done((data) => {
             inputTitel.val(data.title == '' ? 'Dr.' : data.title);

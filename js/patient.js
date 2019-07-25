@@ -43,6 +43,8 @@ $(externalIdForm).submit((e) => {
 
 $(btnZoekPatient).click(() => {
     if (checkExternalId("Vul het externalId in van de patiënt")) {
+        selectPatient.hide();
+        inputNaam.val('');
         foutExternalId.hide();
         const getPatient = PATIENT_URL + inputExternalId.val();
         zoekPatientOpExternalId(getPatient);
@@ -122,9 +124,6 @@ $(selectPatient).change(() => {
 });
 
 function zoekPatientOpExternalId(url) {
-    selectPatient.hide();
-    inputNaam.val('');
-
     $.getJSON(url,
         ((data) => {
             inputAchternaam.val(data.person.lastName);
