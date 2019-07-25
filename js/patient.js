@@ -1,9 +1,10 @@
 // const PATIENT_URL = "https://localhost:8090/patient/";
 // const PATIENT_URL_SEARCH = "https://localhost:8090/patient/search/";
 // const CAREGIVER_URL = "https://localhost:8090/caregiver/";
-const PATIENT_URL = "http://cctest:8090/patient/";
-const PATIENT_URL_SEARCH = "http://cctest:8090/patient/search/";
-const CAREGIVER_URL = "http://cctest:8090/caregiver/";
+
+const PATIENT_URL = "http://christos:8090/patient/";
+const PATIENT_URL_SEARCH = "http://christos:8090/patient/search/";
+const CAREGIVER_URL = "http://christos:8090/caregiver/";
 
 // Formulieren:
 const patientForm = $('#patientForm');
@@ -48,7 +49,6 @@ $(btnZoekPatient).click(() => {
     }
 });
 
-
 $(inputMnemonicNieuweHuisarts).keyup(() => {
     const mnemonicNieuweDokter = inputMnemonicNieuweHuisarts.val();
     if (mnemonicNieuweDokter.length == 5) {
@@ -66,7 +66,6 @@ $(inputMnemonicNieuweHuisarts).keyup(() => {
         });
     }
 });
-
 
 $(btnUpdatePatient).click(() => {
     if (checkExternalId("Vul het externalId in van de patiënt")) {
@@ -117,12 +116,15 @@ $(btnZoekPatientOpNaam).click(() => {
 });
 
 $(selectPatient).change(() => {
-        const getPatient = PATIENT_URL +  selectPatient.val();
-        inputExternalId.val(selectPatient.val());
-        zoekPatientOpExternalId(getPatient);
+    const getPatient = PATIENT_URL + selectPatient.val();
+    inputExternalId.val(selectPatient.val());
+    zoekPatientOpExternalId(getPatient);
 });
 
 function zoekPatientOpExternalId(url) {
+    selectPatient.hide();
+    inputNaam.val('');
+
     $.getJSON(url,
         ((data) => {
             inputAchternaam.val(data.person.lastName);

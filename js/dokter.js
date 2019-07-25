@@ -20,8 +20,9 @@ class Dokter {
 
 // const CAREGIVER_URL = "http://localhost:8090/caregiver/";
 // const CAREGIVER_URL_SEARCH = "http://localhost:8090/caregiver/search/";
-const CAREGIVER_URL = "http://cctest:8090/caregiver/";
-const CAREGIVER_URL_SEARCH = "http://cctest:8090/caregiver/search/";
+const CAREGIVER_URL = "http://christos:8090/caregiver/";
+const CAREGIVER_URL_SEARCH = "http://christos:8090/caregiver/search/";
+
 // Formulieren:
 const formulier = $('#dokterForm');
 const mnemonicFormulier = $('#mnemonicForm');
@@ -80,19 +81,6 @@ $(btnZoekDokterOpNaam).click(() => {
                 hidePleaseWait();
                 toonFoutmelding(jqXHR);
             });
-
-
-        // $.getJSON(CAREGIVER_URL_SEARCH + inputNaam.val(), ((data) => {
-        //     for (let c of data.caregivers) {
-        //         selectDokters.append(new Option(c.firstName + ' ' + c.lastName + '(' + c.externalID + ')', c.externalID));
-        //     }
-        // })).done(() => {
-        //     hidePleaseWait();
-        //     selectDokters.show();
-        // }).fail((jqXHR) => {
-        //     hidePleaseWait();
-        //     toonFoutmelding(jqXHR);
-        // });
     }
 });
 
@@ -161,6 +149,9 @@ function getRequest(url) {
 }
 
 function zoekDokterOpExternalId(url) {
+    selectDokters.hide();
+    inputNaam.val('');
+
     $.ajax(getRequest(url))
         .done((data) => {
             inputTitel.val(data.title == '' ? 'Dr.' : data.title);
@@ -181,29 +172,4 @@ function zoekDokterOpExternalId(url) {
         }).fail((jqXHR) => {
             toonFoutmelding(jqXHR);
         });
-
-
-
-    // $.getJSON(url,
-    //     ((data) => {
-    //         inputTitel.val(data.title == '' ? 'Dr.' : data.title);
-    //         inputAchternaam.val(data.lastName);
-    //         inputVoornaam.val(data.firstName);
-    //         inputNihii.val(data.nihii);
-    //         inputStraatEnNummer.val(data.streetWithNumber);
-    //         inputGemeente.val(data.city);
-    //         inputPostcode.val(data.zip);
-    //         inputTelefoon.val(data.phone);
-    //         inputNihiiAdres.val(data.nihiiAddress);
-    //         selectFormaat.val(data.format).prop('selected', true);
-    //         checkActief.prop('checked', data.active);
-    //         checkEprotocols.prop('checked', data.eProtocols);
-    //         checkPrintprotocols.prop('checked', data.printProtocols);
-    //         checkTweeKopijs.prop('checked', data.secondCopy);
-    //     })
-    // ).done(() => {
-    //     btnUpdateDokter.prop('disabled', false);
-    // }).fail((jqXHR) => {
-    //     toonFoutmelding(jqXHR);
-    // });
 }

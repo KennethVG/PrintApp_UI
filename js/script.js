@@ -1,7 +1,6 @@
 'use strict';
 
 // Globale variabelen en functies die gebruikt worden in dokter en patient 
-
 const inputExternalId = $('#inputExternalId');
 const foutExternalId = $("#foutExternalId");
 const inputNaam = $("#inputNaam");
