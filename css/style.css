@@ -26,3 +26,7 @@ body {
 #printstatus{
     font-weight: bold;
 }
+
+a{
+    cursor: pointer;
+}
