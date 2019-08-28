@@ -6,6 +6,7 @@ $(restart).click(() => {
     $.getJSON(RESTART_URL,
         (response) => {
             console.log(response);
+            window.open("http://christos:8090", "_blank");
         }
     ).done(() => {
         alert("Backend succesvol herstart!");
