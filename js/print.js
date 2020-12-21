@@ -3,8 +3,8 @@
 // const PRINTJOB_URL_START = "https://localhost:8090/printjob/start";
 // const PRINTJOB_URL_STOP = "https://localhost:8090/printjob/stop";
 
-const PRINTJOB_URL_START = "http://christos:8090/printjob/start";
-const PRINTJOB_URL_STOP = "http://christos:8090/printjob/stop";
+const PRINTJOB_URL_START = "http://hermes:8090/printjob/start";
+const PRINTJOB_URL_STOP = "http://hermes:8090/printjob/stop";
 
 const btnStart = $("#start");
 const btnStop = $("#stop");

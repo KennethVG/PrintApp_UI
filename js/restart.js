@@ -1,4 +1,4 @@
-const RESTART_URL = "http://christos:8090/";
+const RESTART_URL = "http://hermes:8090/";
 // const RESTART_URL = "http://localhost:8090/";
 const restart = $('#restart');
 

@@ -2,9 +2,9 @@
 // const PATIENT_URL_SEARCH = "https://localhost:8090/patient/search/";
 // const CAREGIVER_URL = "https://localhost:8090/caregiver/";
 
-const PATIENT_URL = "http://christos:8090/patient/";
-const PATIENT_URL_SEARCH = "http://christos:8090/patient/search/";
-const CAREGIVER_URL = "http://christos:8090/caregiver/";
+const PATIENT_URL = "http://hermes:8090/patient/";
+const PATIENT_URL_SEARCH = "http://hermes:8090/patient/search/";
+const CAREGIVER_URL = "http://hermes:8090/caregiver/";
 
 // Formulieren:
 const patientForm = $('#patientForm');

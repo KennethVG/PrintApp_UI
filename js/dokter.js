@@ -20,8 +20,8 @@ class Dokter {
 
 // const CAREGIVER_URL = "http://localhost:8090/caregiver/";
 // const CAREGIVER_URL_SEARCH = "http://localhost:8090/caregiver/search/";
-const CAREGIVER_URL = "http://christos:8090/caregiver/";
-const CAREGIVER_URL_SEARCH = "http://christos:8090/caregiver/search/";
+const CAREGIVER_URL = "http://hermes:8090/caregiver/";
+const CAREGIVER_URL_SEARCH = "http://hermes:8090/caregiver/search/";
 
 // Formulieren:
 const formulier = $('#dokterForm');
