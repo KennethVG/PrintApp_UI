@@ -18,14 +18,27 @@ class Dokter {
     }
 }
 
-// const CAREGIVER_URL = "http://localhost:8090/caregiver/";
-// const CAREGIVER_URL_SEARCH = "http://localhost:8090/caregiver/search/";
+class LinkedDokter {
+    constructor(externalId, linkedId) {
+        this.externalId = externalId;
+        this.linkedId = linkedId;
+    }
+}
+
+// const CAREGIVER_URL = "http://localhost:8089/caregiver/";
+// const CAREGIVER_URL_SEARCH = "http://localhost:8089/caregiver/search/";
+//
+// const LINKEDCAREGIVER_URL = "http://localhost:8089/linkedCaregiver";
+
 const CAREGIVER_URL = "http://hermes:8090/caregiver/";
 const CAREGIVER_URL_SEARCH = "http://hermes:8090/caregiver/search/";
+
+const LINKEDCAREGIVER_URL = "http://hermes:8090/linkedCaregiver";
 
 // Formulieren:
 const formulier = $('#dokterForm');
 const mnemonicFormulier = $('#mnemonicForm');
+const linkedFormulier = $('#linkedForm');
 
 // Input velden:
 const inputTitel = $('#inputTitel');
@@ -37,6 +50,7 @@ const inputPostcode = $('#inputZip');
 const inputNihii = $('#inputNihii');
 const inputTelefoon = $('#inputTelefoon');
 const inputNihiiAdres = $('#inputNihiiAdres');
+const inputLinkedId = $('#inputLinkedId');
 
 // Select veld
 const selectFormaat = $('#selectFormaat');
@@ -52,6 +66,7 @@ const checkActief = $('#checkActief');
 const btnZoekDokter = $('#zoekDokter');
 const btnUpdateDokter = $('#updateDokter');
 const btnZoekDokterOpNaam = $("#zoekDokterOpNaam");
+const btnUpdateLinkedId = $("#updateLinkedId");
 
 selectDokters.hide();
 
@@ -61,6 +76,10 @@ $(mnemonicFormulier).submit((e) => {
 });
 
 $(formulier).submit((e) => {
+    e.preventDefault();
+});
+
+$(linkedFormulier).submit((e) => {
     e.preventDefault();
 });
 
@@ -78,9 +97,9 @@ $(btnZoekDokterOpNaam).click(() => {
                 hidePleaseWait();
                 selectDokters.show();
             }).fail((jqXHR) => {
-                hidePleaseWait();
-                toonFoutmelding(jqXHR);
-            });
+            hidePleaseWait();
+            toonFoutmelding(jqXHR);
+        });
     }
 });
 
@@ -97,6 +116,38 @@ $(btnZoekDokter).click(() => {
         inputNaam.val('');
         const getDokter = CAREGIVER_URL + inputExternalId.val();
         zoekDokterOpExternalId(getDokter);
+    }
+});
+
+$(btnUpdateLinkedId).click(() => {
+
+    const linkedId = inputLinkedId.val();
+    if (linkedId != null && linkedId.length === 5) {
+        const linkedDokter = new LinkedDokter(inputExternalId.val(), inputLinkedId.val());
+
+        $.ajax({
+            url: LINKEDCAREGIVER_URL,
+            type: "POST",
+            data: JSON.stringify(linkedDokter),
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            },
+            success: function (response) {
+                window.alert(response);
+                mnemonicFormulier.trigger("reset");
+                formulier.trigger("reset");
+                linkedFormulier.trigger("reset");
+                btnUpdateDokter.prop('disabled', true);
+                inputLinkedId.prop('disabled', true);
+                btnUpdateLinkedId.prop('disabled', true);
+            },
+            error: () => {
+                console.log("Niet gelukt!");
+            }
+        });
+    } else {
+        alert("Dit is geen geldige externalId");
     }
 });
 
@@ -127,6 +178,8 @@ $(btnUpdateDokter).click(() => {
                 mnemonicFormulier.trigger("reset");
                 formulier.trigger("reset");
                 btnUpdateDokter.prop('disabled', true);
+                inputLinkedId.prop('disabled', true);
+                btnUpdateLinkedId.prop('disabled', true);
             },
             error: () => {
                 console.log("Niet gelukt!");
@@ -136,7 +189,7 @@ $(btnUpdateDokter).click(() => {
 });
 
 function getRequest(url) {
-    const settings = {
+    return {
         'cache': false,
         "async": true,
         "crossDomain": true,
@@ -147,7 +200,15 @@ function getRequest(url) {
             "Access-Control-Allow-Origin": "*"
         }
     };
-    return settings;
+}
+
+function zoekLinkedId() {
+    $.ajax(getRequest(LINKEDCAREGIVER_URL + "/" + inputExternalId.val()))
+        .done((data) => {
+            inputLinkedId.val(data.linkedId);
+        }).fail((jqXHR) => {
+        toonFoutmelding(jqXHR);
+    });
 }
 
 function zoekDokterOpExternalId(url) {
@@ -168,7 +229,12 @@ function zoekDokterOpExternalId(url) {
             checkPrintprotocols.prop('checked', data.printProtocols);
             checkTweeKopijs.prop('checked', data.secondCopy);
             btnUpdateDokter.prop('disabled', false);
+            inputLinkedId.prop('disabled', false);
+            btnUpdateLinkedId.prop('disabled', false);
+
+            zoekLinkedId();
+
         }).fail((jqXHR) => {
-            toonFoutmelding(jqXHR);
-        });
+        toonFoutmelding(jqXHR);
+    });
 }
