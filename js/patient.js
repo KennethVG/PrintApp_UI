@@ -1,6 +1,6 @@
-// const PATIENT_URL = "https://localhost:8090/patient/";
-// const PATIENT_URL_SEARCH = "https://localhost:8090/patient/search/";
-// const CAREGIVER_URL = "https://localhost:8090/caregiver/";
+// const PATIENT_URL = "http://localhost:8089/patient/";
+// const PATIENT_URL_SEARCH = "http://localhost:8089/patient/search/";
+// const CAREGIVER_URL = "http://localhost:8089/caregiver/";
 
 const PATIENT_URL = "http://hermes:8090/patient/";
 const PATIENT_URL_SEARCH = "http://hermes:8090/patient/search/";
@@ -18,6 +18,8 @@ const inputHuisArtsAchternaam = $("#inputHuisartsAchternaam");
 const inputHuisArtsVoornaam = $("#inputHuisartsVoornaam");
 const inputMnemonicNieuweHuisarts = $("#inputMnemonicNieuweHuisarts");
 const inputNaamNieuweHuisarts = $("#inputNaamNieuweHuisarts");
+const inputGDPR = $("#inputGDPR");
+const inputOpmerking = $("#inputOpmerking");
 
 // Select veld
 const selectPatient = $("#selectPatient");
@@ -131,6 +133,8 @@ function zoekPatientOpExternalId(url) {
             inputHuisArtsMnemonic.val(data.externalCaregiver.externalID);
             inputHuisArtsAchternaam.val(data.externalCaregiver.lastName);
             inputHuisArtsVoornaam.val(data.externalCaregiver.firstName);
+            inputOpmerking.val(data.remark);
+            inputGDPR.prop('checked', data.consent == true);
         })
     ).done(() => {
         inputMnemonicNieuweHuisarts.prop('disabled', false);
